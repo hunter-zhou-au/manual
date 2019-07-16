@@ -1,15 +1,24 @@
 # 一台机器绑定两个 github 账号
 
 1. 生成两个 SSH KEY
-   `ssh-keygen -t rsa -C "hunter.zhou.au@gmail.com" -f ~/.ssh/huntergitkey_rsa`
-   `ssh-keygen -t rsa -C "polokang@gmail.com" -f ~/.ssh/polokang163gitkey_rsa`
+
+```
+  ssh-keygen -t rsa -C "hunter.zhou.au@gmail.com" -f ~/.ssh/huntergitkey_rsa
+  ssh-keygen -t rsa -C "polokang@gmail.com" -f ~/.ssh/polokang163gitkey_rsa
+```
+
 2. 把 key 加到 ssh agent 上
-   `ssh-add ~/.ssh/huntergitkey_rsa`
-   `ssh-add ~/.ssh/polokang163gitkey_rsa`
-   可以通过 `ssh-add -l` 来确认结果
+
+```
+  ssh-add ~/.ssh/huntergitkey_rsa
+  ssh-add ~/.ssh/polokang163gitkey_rsa
+```
+
+可以通过 `ssh-add -l` 来确认结果
 
 3. 进入~/.ssh/ 目录，创建 config 文件,并配置（CMD + SHIFT + G）
-   `touch config`
+
+> touch config
 
 ```
 #one(self-email@.com)
@@ -35,4 +44,16 @@
 git init
 git config user.email "hunter-zhou-au@gmail.com"
 git config user.name "hunter-zhou-au"
+```
+
+---
+
+6. 上传代码
+
+```
+git add .
+git commit -m 'init'
+git remote add origin git@github.com:hunter-zhou-au/manual.git
+git pull --rebase origin master
+git push -u origin master
 ```
