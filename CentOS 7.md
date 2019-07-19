@@ -8,6 +8,13 @@
 - 19.1.1 from /usr/lib/python2.7/site-packages/pip (python 2.7)
 - Python 2.7.5
 
+### List
+
+- Java
+- Tomcat8
+- mariadb
+- mongodb 3.4
+
 ### 步骤：
 
 1. Install Java
@@ -70,3 +77,58 @@
 - `rm -rf apache-tomcat-8.5.39`
 
 - `wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz`
+
+---
+
+##### 安装 mongodb 3.4
+
+1. 配置 MongoDB 的 yum 源(创建 yum 源文件)
+
+   > vim/etc/yum.repos.d/mongodb-org-3.4.repo
+
+2. 添加以下内容：
+
+```
+[mongodb-org-3.4]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
+```
+
+3. 安装 MongoDB
+
+   > yum -y install mongodb-org
+
+4. 常用命令
+
+- `mongod` 查看 mongodb 信息：(可以看到 mongodb 端口号，以及存储数据文件夹/data/db)
+- `whereis mongod` 查看 mongo 安装位置
+- `systemctl start mongod.service` 启动 MongDB
+- `systemctl stop mongod.service` 停止 MongDB
+- `systemctl restart mongod.service` 重启 mongodb
+- `systemctl status mongod.service` 查看 Mongdb 状态
+- `systemctl enable mongod.service` 设置开机启动
+- `mongo` 进入 mongo
+- `show dbs` 查看数据库
+
+5. 设置 mongodb 远程访问：
+
+- 修改配置文件：`vim /etc/mongod.conf` 进入配置文件中，将 bindIp 注释掉。并且重启 mongdb。
+
+- 开启防火墙端口 `firewall-cmd --permanent --zone=public --add-port=27017/tcp`
+- 使规则生效 `firewall-cmd –reload`
+- 查看开放的所有端口号 `firewall-cmd --list-ports`
+- 远程 HTTP 访问： http://ip:27017
+
+##### 安装 forever 用来替代 node 启动（Express 项目)
+
+1. 安装
+   > npm install forever -g
+2. 常用命令
+
+- `forever –help`
+- `forever start app.js`
+- `forever stop app.js`
+- `forever start -l forever.log -o out.log -e err.log app.js`

@@ -39,3 +39,54 @@ n stable
    ```
     $ source ~/.bash_profile
    ```
+
+---
+
+# install pm2
+
+1. 安装 pm2
+
+```
+npm install pm2 -g
+```
+
+2. 根目录 www 下创建文件，hello.js,内容如下：
+
+```
+const http = require('http')
+http.createServer(function(req,res) {
+res.writeHead(200,{'Content-Type':'text/plain'})
+res.end('hello world')
+}).listen(8081)
+
+console.log('server test')
+```
+
+3. 执行 pm2 start hello.js 你的服务就跑起来了，此时地址栏输入http://118.xxx.xxx.xx:8081（你自己的服务器IP）就会看到hello world
+
+4. pm2 的几个常用命令：
+
+- `pm2 start <projectname>` 启动项目
+- `pm2 list` 查看启动的应用
+- `pm2 show <projectname>` 查看详细信息
+- `pm2 logs` 查看当前信息
+- `pm2 stop <projectname>` 停止项目
+- `pm2 delete <projectname>` 删除项目
+
+---
+
+# 本机安装 umi
+
+1. 安装 yarn
+
+```
+sudo npm i yarn -g
+yarn -v
+```
+
+2. 安装 umi
+
+```
+yarn global add umi
+umi -v
+```
