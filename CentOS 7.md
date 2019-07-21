@@ -122,6 +122,27 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
 - 查看开放的所有端口号 `firewall-cmd --list-ports`
 - 远程 HTTP 访问： http://ip:27017
 
+6. 创建用户并设置权限
+
+- 创建用户
+
+  > db.createUser({user:"appAdmin",pwd:"OpalOpal",roles:[{role:"userAdminAnyDatabase",db:"admin"}]})
+
+- 使用 db.auth()验证 User 是否有权限访问当前数据库
+
+  > db.auth('appAdmin', 'password')
+
+- 创建文档（表）
+
+  > db.createCollection('user')
+
+- 显示当前数据库下的文档（表）
+
+  > show collections
+
+- 往 user 文档中添加一条数据
+  > db.user.insert({name: 'better', age: 18})
+
 ##### 安装 forever 用来替代 node 启动（Express 项目)
 
 1. 安装
@@ -132,3 +153,20 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
 - `forever start app.js`
 - `forever stop app.js`
 - `forever start -l forever.log -o out.log -e err.log app.js`
+- `forever list` 显示所有运行的服务
+- `forever stopall` 停止所有运行的服务
+- `forever start -l forever.log -e err.log -a app.js`
+
+##### 安装 pm2 来替代 node 启动
+
+1. 安装
+
+   > npm install -g pm2
+
+2. 常用命令
+
+- `pm2 start index.js --name taskName` 启动 taskName 是给这个进程取个名字
+- `pm2 stop index.js` 停止
+- `pm2 delete index.js` 删除
+- `pm2 restart index.js` 重启
+- `pm2 reload index.js` 重载

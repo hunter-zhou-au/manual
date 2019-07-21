@@ -74,19 +74,3 @@ console.log('server test')
 - `pm2 delete <projectname>` 删除项目
 
 ---
-
-# 本机安装 umi
-
-1. 安装 yarn
-
-```
-sudo npm i yarn -g
-yarn -v
-```
-
-2. 安装 umi
-
-```
-yarn global add umi
-umi -v
-```
